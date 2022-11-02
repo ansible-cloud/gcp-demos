@@ -8,7 +8,7 @@
       google.cloud.gcp_compute_disk:
         name: disk-instance
         size_gb: 50
-        source_image: projects/rhel-cloud/global/images/rhel-9-v20221102
+        source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
