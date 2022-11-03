@@ -35,7 +35,7 @@
 
     - name: create a VM instance
       google.cloud.gcp_compute_instance:
-        name: RHEL9
+        name: rhel-9-vm
         machine_type: n1-standard-1
         disks:
         - auto_delete: 'true'
