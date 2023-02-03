@@ -15,14 +15,14 @@
         project: ansiblegcp-375015
         auth_kind: serviceaccount
         state: present
+      register: cluster
 
     - name: Create a node pool for the GKE cluster
       google.cloud.gcp_container_node_pool:
         name: gke-nodepool01
         initial_node_count: 2
-        cluster: gke-cluster01
+        cluster: "{{ cluster }}"
         location: us-east1-b
         project: ansiblegcp-375015
         auth_kind: serviceaccount
         state: present
-        
