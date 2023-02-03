@@ -1,0 +1,17 @@
+---
+- name: Create GKE Cluster
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Create a GKE cluster
+      google.cloud.gcp_container_cluster:
+        name: gke-cluster01
+        initial_node_count: 2
+        node_config:
+          machine_type: n1-standard-4
+          disk_size_gb: 500
+        location: us-east1-a
+        project: ansiblegcp
+        auth_kind: serviceaccount
+        state: present

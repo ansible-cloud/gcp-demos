@@ -1,6 +1,7 @@
 {
     "yaml.schemas": {
         "kubernetes": "*.yaml ",
-        "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json#/$defs/playbook": "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gcp-instance.yml"
+        "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json#/$defs/playbook": "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gcp-instance.yml",
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gke-cluster.yml"
     }
 }
