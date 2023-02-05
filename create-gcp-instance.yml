@@ -4,19 +4,27 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Create a disk mapped from a RHEL-9 image
+    - name: Create a disk mapped from a RHEL-9 image for rhel1
       google.cloud.gcp_compute_disk:
-        name: "{{ item.name }}"
+        name: rhel1d
         size_gb: 50
         source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-      with_items:
-        - {name: 'rhel1d'}
-        - {name: 'rhel2d'}
-      register: disk
+      register: diskrhel1
+
+    - name: Create a disk mapped from a RHEL-9 image for rhel2
+      google.cloud.gcp_compute_disk:
+        name: rhel2d
+        size_gb: 50
+        source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
+        zone: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: diskrhel2
 
     - name: Create a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
@@ -63,8 +71,7 @@
         disks:
           - auto_delete: 'true'
             boot: 'true'
-            source:
-              - "{{ disk.rhel1d }}"
+            source: "{{ diskrhel1 }}"
           - auto_delete: 'true'
             interface: NVME
             type: SCRATCH
@@ -90,8 +97,7 @@
         disks:
           - auto_delete: 'true'
             boot: 'true'
-            source:
-              - rhel2d
+            source: "{{ diskrhel2 }}"
           - auto_delete: 'true'
             interface: NVME
             type: SCRATCH
