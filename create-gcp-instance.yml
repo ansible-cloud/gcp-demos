@@ -64,7 +64,7 @@
           - auto_delete: 'true'
             boot: 'true'
             source:
-              - "{{ disk.[0] }}"
+              - "{{ disk.rhel1d }}"
           - auto_delete: 'true'
             interface: NVME
             type: SCRATCH
