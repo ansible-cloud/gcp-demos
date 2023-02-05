@@ -6,13 +6,16 @@
   tasks:
     - name: Create a disk mapped from a RHEL-9 image
       google.cloud.gcp_compute_disk:
-        name: disk-instance
+        name: "{{ item.name }}"
         size_gb: 50
         source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
+      with_items:
+        - {name: 'rhel1d'}
+        - {name: 'rhel2d'}
       register: disk
 
     - name: Create a Google Virtual Private Cloud (VPC) network
@@ -57,7 +60,7 @@
         disks:
           - auto_delete: 'true'
             boot: 'true'
-            source: "{{ disk }}"
+            source: "{{ item.disk }}"
           - auto_delete: 'true'
             interface: NVME
             type: SCRATCH
@@ -76,5 +79,6 @@
         auth_kind: serviceaccount
         state: present
       with_items:
-        - { name: 'rhel1' }
-        - { name: 'rhel2' }
+        - {name: 'rhel1', disk: 'rhel1d'}
+        - {name: 'rhel2', disk: 'rhel2d'}
+#

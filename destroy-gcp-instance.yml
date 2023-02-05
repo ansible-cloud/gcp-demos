@@ -14,14 +14,22 @@
         auth_kind: serviceaccount
         state: absent
       with_items:
-        - { name: 'rhel1' }
-        - { name: 'rhel2' }
+        - {name: 'rhel1'}
+        - {name: 'rhel2'}
 
     - name: Destroy an IPv4 public IP address
       google.cloud.gcp_compute_address:
         name: ipaddress-instance
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: absent
+
+    - name: create a firewall
+      google.cloud.gcp_compute_firewall:
+        name: allowssh
+        project: "{{ gcp_project }}"
+        network: network-instance
         auth_kind: serviceaccount
         state: absent
 
@@ -35,8 +43,12 @@
 
     - name: Destroy a disk mapped from a vm image
       google.cloud.gcp_compute_disk:
-        name: disk-instance
+        name: "{{ item.name }}"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: absent
+      with_items:
+        - {name: 'rhel1d'}
+        - {name: 'rhel2d'}
+#
