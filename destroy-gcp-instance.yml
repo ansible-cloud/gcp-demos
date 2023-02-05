@@ -32,7 +32,6 @@
       google.cloud.gcp_compute_firewall:
         name: allowssh
         project: "{{ gcp_project }}"
-#        network: projects/ansiblegcp-375015/global/networks/network-instance
         auth_kind: serviceaccount
         state: absent          
 
