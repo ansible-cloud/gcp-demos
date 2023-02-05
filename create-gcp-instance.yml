@@ -44,8 +44,6 @@
               - '22'
               - '80'
               - '443'
-        target_tags:
-          - sshallowed
         project: "{{ gcp_project }}"
         network: "{{ network }}"
         auth_kind: serviceaccount
