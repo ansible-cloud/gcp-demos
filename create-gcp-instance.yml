@@ -16,7 +16,7 @@
       with_items:
         - {name: 'rhel1d'}
         - {name: 'rhel2d'}
-      register: disk
+#      register: disk
 
     - name: Create a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
@@ -54,7 +54,7 @@
       with_items:
         - {name: 'rhel1ip'}
         - {name: 'rhel2ip'}
-      register: ipaddress
+#      register: ipaddress
 
     - name: create a VM instance
       google.cloud.gcp_compute_instance:
