@@ -27,7 +27,7 @@
         state: present
       register: network
 
-    - name: create a firewall
+    - name: Create a firewall rule to allow SSH
       google.cloud.gcp_compute_firewall:
         name: allowssh
         allowed:
@@ -44,7 +44,7 @@
         state: present
       register: sshallowed
 
-    - name: create an IPv4 public IP address
+    - name: Create an IPv4 public IP address
       google.cloud.gcp_compute_address:
         name: "{{ item.name }}"
         region: "{{ gcp_region }}"
@@ -56,7 +56,7 @@
         - {name: 'rhel2ip'}
 #      register: ipaddress
 
-    - name: create a VM instance
+    - name: Create the VM instances
       google.cloud.gcp_compute_instance:
         name: "{{ item.name }}"
         machine_type: n1-standard-1

@@ -28,17 +28,17 @@
         - {name: 'rhel1ip'}
         - {name: 'rhel2ip'}
 
-    - name: create a firewall
+    - name: Destroy a firewall rule
       google.cloud.gcp_compute_firewall:
         name: allowssh
         project: "{{ gcp_project }}"
-        network: network-instance
+        network: "network-instance"
         auth_kind: serviceaccount
         state: absent
 
     - name: Destroy a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
-        name: network-instance
+        name: "network-instance"
         auto_create_subnetworks: 'true'
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
