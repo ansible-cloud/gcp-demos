@@ -107,5 +107,4 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-      with_items:
 ##
