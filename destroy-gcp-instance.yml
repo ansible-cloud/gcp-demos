@@ -32,7 +32,7 @@
       google.cloud.gcp_compute_firewall:
         name: allowssh
         project: "{{ gcp_project }}"
-        network: "network-instance"
+        network: "networks/network-instance"
         auth_kind: serviceaccount
         state: absent
 
