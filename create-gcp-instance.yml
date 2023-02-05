@@ -52,17 +52,23 @@
         state: present
       register: sshallowed
 
-    - name: Create an IPv4 public IP address
+    - name: Create an IPv4 public IP address for rhel1
       google.cloud.gcp_compute_address:
-        name: "{{ item.name }}"
+        name: rhel1ip
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-      with_items:
-        - {name: 'rhel1ip'}
-        - {name: 'rhel2ip'}
-      register: ipaddress
+      register: rhel1ip
+      
+    - name: Create an IPv4 public IP address for rhel2
+      google.cloud.gcp_compute_address:
+        name: rhel2ip
+        region: "{{ gcp_region }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: rhel2ip
 
     - name: Create the rhel1 VM instances
       google.cloud.gcp_compute_instance:
@@ -83,7 +89,7 @@
           - network: "{{ network }}"
             access_configs:
               - name: External NAT
-                nat_ip: "{{ ipaddress['rhel1ip'] }}"
+                nat_ip: "{{ rhel1ip }}"
                 type: ONE_TO_ONE_NAT
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
@@ -109,7 +115,7 @@
           - network: "{{ network }}"
             access_configs:
               - name: External NAT
-                nat_ip: "{{ ipaddress['rhel2ip'] }}"
+                nat_ip: "{{ rhel2ip }}"
                 type: ONE_TO_ONE_NAT
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
