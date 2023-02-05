@@ -6,13 +6,16 @@
   tasks:
     - name: Destroy a VM instance
       google.cloud.gcp_compute_instance:
-        name: rhel-9-vm
+        name: "{{ item.name }}"
         labels:
           environment: production
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: absent
+      with_items:
+        - { name: 'rhel1' }
+        - { name: 'rhel2' }
 
     - name: Destroy an IPv4 public IP address
       google.cloud.gcp_compute_address:
@@ -30,7 +33,7 @@
         auth_kind: serviceaccount
         state: absent
 
-    - name: Destroy a disk mapped from a rhel-9-vm image
+    - name: Destroy a disk mapped from a vm image
       google.cloud.gcp_compute_disk:
         name: disk-instance
         zone: "{{ gcp_zone }}"

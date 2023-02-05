@@ -36,7 +36,7 @@
         target_tags:
           - sshallowed
         project: "{{ gcp_project }}"
-        network: "networks/{{ network }}"
+        network: "{{ network }}"
         auth_kind: serviceaccount
         state: present
       register: sshallowed
