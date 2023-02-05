@@ -28,13 +28,13 @@
         - {name: 'rhel1ip'}
         - {name: 'rhel2ip'}
 
-    # - name: Destroy a firewall rule
-    #   google.cloud.gcp_compute_firewall:
-    #     name: allowssh
-    #     project: "{{ gcp_project }}"
-    #     network: "networks/network-instance"
-    #     auth_kind: serviceaccount
-    #     state: absent          
+    - name: Destroy a firewall rule
+      google.cloud.gcp_compute_firewall:
+        name: allowssh
+        project: "{{ gcp_project }}"
+        network: projects/ansiblegcp-375015/global/networks/network-instance
+        auth_kind: serviceaccount
+        state: absent          
 
     - name: Destroy a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
