@@ -83,7 +83,7 @@
           - network: "{{ network }}"
             access_configs:
               - name: External NAT
-                nat_ip: rhel1ip
+                nat_ip: "{{ ipaddress['rhel1ip'] }}"
                 type: ONE_TO_ONE_NAT
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
@@ -109,7 +109,7 @@
           - network: "{{ network }}"
             access_configs:
               - name: External NAT
-                nat_ip: rhel2ip
+                nat_ip: "{{ ipaddress['rhel2ip'] }}"
                 type: ONE_TO_ONE_NAT
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
