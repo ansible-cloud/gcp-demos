@@ -19,11 +19,14 @@
 
     - name: Destroy an IPv4 public IP address
       google.cloud.gcp_compute_address:
-        name: ipaddress-instance
+        name: "{{ item.name }}"
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: absent
+      with_items:
+        - {name: 'rhel1ip'}
+        - {name: 'rhel2ip'}
 
     - name: create a firewall
       google.cloud.gcp_compute_firewall:

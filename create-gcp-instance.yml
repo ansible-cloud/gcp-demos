@@ -46,11 +46,14 @@
 
     - name: create an IPv4 public IP address
       google.cloud.gcp_compute_address:
-        name: ipaddress-instance
+        name: "{{ item.name }}"
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
+      with_items:
+        - {name: 'rhel1ip'}
+        - {name: 'rhel2ip'}
       register: ipaddress
 
     - name: create a VM instance
@@ -72,13 +75,13 @@
           - network: "{{ network }}"
             access_configs:
               - name: External NAT
-                nat_ip: "{{ ipaddress }}"
+                nat_ip: "{{ item.ipaddress }}"
                 type: ONE_TO_ONE_NAT
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
       with_items:
-        - {name: 'rhel1', disk: 'rhel1d'}
-        - {name: 'rhel2', disk: 'rhel2d'}
+        - {name: 'rhel1', disk: 'rhel1d', ipaddress: 'rhel1ip'}
+        - {name: 'rhel2', disk: 'rhel2d', ipaddress: 'rhel2ip'}
 #
