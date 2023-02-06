@@ -35,12 +35,19 @@
         auth_kind: serviceaccount
         state: absent
 
+    - name: get info on the vpc subnetwork
+      gcp_compute_subnetwork_info:
+        region: us-east1
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+      register: vpcsubnet
+
     - name: Destroy the vpc subnet
       google.cloud.gcp_compute_subnetwork:
         name: instancenet
         project: "{{ gcp_project }}"
         region: us-east1
-        network: "projects/ansiblegcp-375015/regions/us-east1/subnetworks/instancenet"
+        network: "{{ vpcsubnet }}"
         ip_cidr_range: 172.16.0.0/16
         auth_kind: serviceaccount
         state: absent
