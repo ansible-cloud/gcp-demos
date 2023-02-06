@@ -37,13 +37,14 @@
 
     - name: Create a subnetwork
       google.cloud.gcp_compute_subnetwork:
-        name: ansiblenet
+        name: instanenet
         region: us-east1
         network: "{{ network }}"
         ip_cidr_range: 172.16.0.0/16
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
+      register: vpcsubnet
 
     - name: Create a firewall rule to allow SSH
       google.cloud.gcp_compute_firewall:
@@ -99,6 +100,7 @@
               - name: External NAT
                 nat_ip: "{{ rhel1ip }}"
                 type: ONE_TO_ONE_NAT
+          - subnetwork: "{{ vpcsubnet }}"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
@@ -125,6 +127,7 @@
               - name: External NAT
                 nat_ip: "{{ rhel2ip }}"
                 type: ONE_TO_ONE_NAT
+          - subnetwork: "{{ vpcsubnet }}"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
