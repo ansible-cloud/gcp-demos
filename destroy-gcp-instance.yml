@@ -37,11 +37,11 @@
 
     - name: Destroy the vpc subnet
       google.cloud.gcp_compute_subnetwork:
-        name: 
-          - instancenet
+        name: instancenet
         project: "{{ gcp_project }}"
         region: us-east1
-        network: network-instance
+        network:
+          - network-instance
         ip_cidr_range: 172.16.0.0/16
         auth_kind: serviceaccount
         state: absent
