@@ -35,7 +35,7 @@
         state: present
       register: network
 
-    - name: create a subnetwork
+    - name: Create a subnetwork
       google.cloud.gcp_compute_subnetwork:
         name: ansiblenet
         region: us-east1
@@ -43,7 +43,7 @@
         ip_cidr_range: 172.16.0.0/16
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
-        state: present      
+        state: present
 
     - name: Create a firewall rule to allow SSH
       google.cloud.gcp_compute_firewall:
@@ -68,7 +68,7 @@
         auth_kind: serviceaccount
         state: present
       register: rhel1ip
-     
+
     - name: Create an IPv4 public IP address for rhel2
       google.cloud.gcp_compute_address:
         name: rhel2ip
