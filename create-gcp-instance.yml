@@ -132,4 +132,3 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-#
