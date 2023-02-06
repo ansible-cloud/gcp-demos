@@ -35,15 +35,15 @@
         auth_kind: serviceaccount
         state: absent
 
-    - name: Destroy the vpc subnet
-      google.cloud.gcp_compute_subnetwork:
-        name: instancenet
-        project: "{{ gcp_project }}"
-        region: us-east1
-        network: network-instance
-        ip_cidr_range: 172.16.0.0/16
-        auth_kind: serviceaccount
-        state: absent
+    # - name: Destroy the vpc subnet
+    #   google.cloud.gcp_compute_subnetwork:
+    #     name: instancenet
+    #     project: "{{ gcp_project }}"
+    #     region: us-east1
+    #     network: network-instance
+    #     ip_cidr_range: 172.16.0.0/16
+    #     auth_kind: serviceaccount
+    #     state: absent
 
     - name: Destroy a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
