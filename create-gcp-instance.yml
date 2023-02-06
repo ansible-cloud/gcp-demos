@@ -100,7 +100,7 @@
               - name: External NAT
                 nat_ip: "{{ rhel1ip }}"
                 type: ONE_TO_ONE_NAT
-          - subnetwork: "{{ vpcsubnet }}"
+            subnetwork: "{{ vpcsubnet }}"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
@@ -127,7 +127,7 @@
               - name: External NAT
                 nat_ip: "{{ rhel2ip }}"
                 type: ONE_TO_ONE_NAT
-          - subnetwork: "{{ vpcsubnet }}"
+            subnetwork: "{{ vpcsubnet }}"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
