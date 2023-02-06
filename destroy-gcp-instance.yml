@@ -40,8 +40,7 @@
         name: instancenet
         project: "{{ gcp_project }}"
         region: us-east1
-        network:
-          - network-instance
+        network: "{{ network }}"
         ip_cidr_range: 172.16.0.0/16
         auth_kind: serviceaccount
         state: absent
@@ -52,6 +51,7 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: absent
+      register: network
 
     - name: Destroy a disk mapped from a vm image
       google.cloud.gcp_compute_disk:
