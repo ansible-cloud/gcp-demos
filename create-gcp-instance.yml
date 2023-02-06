@@ -29,11 +29,21 @@
     - name: Create a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
         name: network-instance
-        auto_create_subnetworks: 'true'
+        auto_create_subnetworks: 'false'
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
       register: network
+
+    - name: create a subnetwork
+      google.cloud.gcp_compute_subnetwork:
+        name: ansiblenet
+        region: us-east1
+        network: "{{ network }}"
+        ip_cidr_range: 172.16.0.0/16
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present      
 
     - name: Create a firewall rule to allow SSH
       google.cloud.gcp_compute_firewall:
@@ -58,7 +68,7 @@
         auth_kind: serviceaccount
         state: present
       register: rhel1ip
-      
+     
     - name: Create an IPv4 public IP address for rhel2
       google.cloud.gcp_compute_address:
         name: rhel2ip
@@ -119,4 +129,4 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-##
+#

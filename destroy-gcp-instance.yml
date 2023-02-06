@@ -33,7 +33,7 @@
         name: allowssh
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
-        state: absent          
+        state: absent
 
     - name: Destroy a Google Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
