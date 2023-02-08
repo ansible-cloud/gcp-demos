@@ -35,8 +35,8 @@
         auth_kind: serviceaccount
         state: absent
 
-    - name: get info on the vpc subnetwork
-      gcp_compute_subnetwork_info:
+    - name: Get info on the vpc subnetwork
+      google.cloud.gcp_compute_subnetwork_info:
         region: us-east1
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
