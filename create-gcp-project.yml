@@ -7,7 +7,9 @@
     - name: Create a Google Cloud Project
       google.cloud.gcp_resourcemanager_project:
         name: "{{ project_name }}"
-        id: "{{ parent_resource_id }}"
-        type: "{{ parent_resource_type }}"
+        id: ansibletest-{{ 10000000000 | random }}
         auth_kind: serviceaccount
+        parent: 
+          id: "{{ parent_resource_id }}"
+          type: "{{ parent_resource_type }}"
         state: present
