@@ -6,7 +6,7 @@
   tasks:
     - name: Create a Google Cloud Project
       google.cloud.gcp_resourcemanager_project:
-        name: MyDemoprojecgt
+        name: "{{ parent_name }}"
         id: "{{ parent_resource_id }}"
         type: "{{ parent_resource_type }}"
         auth_kind: serviceaccount
