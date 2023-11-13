@@ -1,0 +1,88 @@
+---
+- name: Create GCP resources and then create a GCP instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Create a disk mapped from a RHEL-9 image for the VM
+      google.cloud.gcp_compute_disk:
+        name: '"{{ vm_name }}"_disk'
+        size_gb: 50
+        source_image: "projects/rhel-cloud/global/images/rhel-9-v20231010"
+        zone: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: vmdisk
+
+    - name: Create a Google Virtual Private Cloud (VPC) network
+      google.cloud.gcp_compute_network:
+        name: network-instance
+        auto_create_subnetworks: 'false'
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: network
+
+    - name: Create a subnetwork
+      google.cloud.gcp_compute_subnetwork:
+        name: instancenet
+        region: "{{ gcp_region }}"
+        network: "{{ network }}"
+        ip_cidr_range: 172.16.0.0/16
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: vpcsubnet
+
+    - name: Create a firewall rule to allow SSH
+      google.cloud.gcp_compute_firewall:
+        name: allowssh
+        allowed:
+          - ip_protocol: tcp
+            ports:
+              - '22'
+              - '80'
+              - '443'
+        project: "{{ gcp_project }}"
+        network: "{{ network }}"
+        auth_kind: serviceaccount
+        state: present
+      register: sshallowed
+
+    - name: Create an IPv4 public IP address for the VM
+      google.cloud.gcp_compute_address:
+        name: '"{{ vm_name }}"_ip'
+        region: "{{ gcp_region }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: vmip
+
+    - name: Create the VM instances
+      google.cloud.gcp_compute_instance:
+        name: "{{ vm_name }}"
+        machine_type: n1-standard-1
+        disks:
+          - auto_delete: 'true'
+            boot: 'true'
+            source: "{{ vmdisk }}"
+          - auto_delete: 'true'
+            interface: NVME
+            type: SCRATCH
+            initialize_params:
+              disk_type: local-ssd
+        labels:
+          environment: production
+        network_interfaces:
+          - network: "{{ network }}"
+            access_configs:
+              - name: External NAT
+                nat_ip: "{{ vmipip }}"
+                type: ONE_TO_ONE_NAT
+            subnetwork: "{{ vpcsubnet }}"
+        zone: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+
