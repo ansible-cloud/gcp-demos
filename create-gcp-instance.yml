@@ -38,7 +38,7 @@
     - name: Create a subnetwork
       google.cloud.gcp_compute_subnetwork:
         name: instancenet
-        region: us-east1
+        region: "{{ gcp_region }}"
         network: "{{ network }}"
         ip_cidr_range: 172.16.0.0/16
         project: "{{ gcp_project }}"
