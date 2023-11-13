@@ -1,5 +1,5 @@
 ---
-- name: Destroy GCP VM instance and it's resources
+- name: Destroy GCP VMs rhel1 and rhel2 and all associated instance resources
   hosts: localhost
   connection: local
   gather_facts: false
@@ -37,7 +37,7 @@
 
     - name: Get info on the vpc subnetwork
       google.cloud.gcp_compute_subnetwork_info:
-        region: us-east1
+        region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
       register: vpcsubnet
@@ -46,7 +46,7 @@
       google.cloud.gcp_compute_subnetwork:
         name: instancenet
         project: "{{ gcp_project }}"
-        region: us-east1
+        region: "{{ gcp_region }}"
         network: "{{ vpcsubnet }}"
         ip_cidr_range: 172.16.0.0/16
         auth_kind: serviceaccount
