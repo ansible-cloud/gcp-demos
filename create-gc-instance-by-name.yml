@@ -6,7 +6,7 @@
   tasks:
     - name: Create a disk mapped from a RHEL-9 image for the VM
       google.cloud.gcp_compute_disk:
-        name: '"{{ vm_name }}"_disk'
+        name: '"{{ vm_name }}"disk'
         size_gb: 50
         source_image: "projects/rhel-cloud/global/images/rhel-9-v20231010"
         zone: "{{ gcp_zone }}"
@@ -52,7 +52,7 @@
 
     - name: Create an IPv4 public IP address for the VM
       google.cloud.gcp_compute_address:
-        name: '"{{ vm_name }}"_ip'
+        name: '"{{ vm_name }}"ip'
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
@@ -85,4 +85,3 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-
