@@ -58,7 +58,7 @@
     #     project: "{{ gcp_project }}"
     #     auth_kind: serviceaccount
     #     state: absent
- 
+
     - name: Destroy a disk mapped from a vm image
       google.cloud.gcp_compute_disk:
         name: "{{ item.name }}"

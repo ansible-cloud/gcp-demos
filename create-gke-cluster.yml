@@ -11,8 +11,8 @@
         node_config:
           machine_type: n1-standard-4
           disk_size_gb: 500
-        location: us-east1-b
-        project: ansiblegcp-375015
+        location: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
       register: cluster
@@ -22,7 +22,7 @@
         name: gke-nodepool01
         initial_node_count: 2
         cluster: "{{ cluster }}"
-        location: us-east1-b
-        project: ansiblegcp-375015
+        location: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
