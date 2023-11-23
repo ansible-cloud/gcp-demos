@@ -18,7 +18,7 @@
 
     - name: Display GCP VM information to terminal
       ansible.builtin.debug:
-        msg: "{{ gcp_instance_info }}"
+        msg: "{{ gcp_instance_info.resources }}"
 
     #  - name: Display GCP VM information to terminal
     #   ansible.builtin.debug:
