@@ -18,6 +18,10 @@
 
     - name: Display GCP VM information to terminal
       ansible.builtin.debug:
+        msg: "{{ gcp_instance_info }}"
+
+    - name: Display GCP VM information to terminal
+      ansible.builtin.debug:
         msg:
           - "VM Instance Name:             {{ item.tags['Name'] | default('The tag *Name* Does not exist') }}"
           - "VM Instance ID:               {{ item.instance_id }}"
