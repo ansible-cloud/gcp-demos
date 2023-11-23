@@ -1,0 +1,31 @@
+---
+- name: Grab some specific details about the GCP VM instances and display them
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    vm_region: "{{ gcp_region | default('us-east1') }}"
+    filter_tag: "{{ your_tag | default('*')}}"
+
+  tasks:
+
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        region: "{{ gcp_region }}"
+        project: "{{ gcp_project }}"
+      register: gcp_instance_info
+
+    - name: Display GCP VM information to terminal
+      debug:
+        msg:
+          - "VM Instance Name:             {{ item.tags['Name'] | default('The tag *Name* Does not exist') }}"
+          - "VM Instance ID:               {{ item.instance_id }}"
+          - "VM VPC ID:                    {{ item.vpc_id }}"
+          - "VM Instance Private DNS Name: {{ item.private_dns_name }}"
+          - "VM Instance Private IP:       {{ item.private_ip_address }}"
+          - "VM Instance Public DNS Name:  {{ item.public_dns_name | default('The *Public DNS Name* Does not exist') }}"
+          - "VM Instance Public IP:        {{ item.public_ip_address | default('The *Public IP Address* Does not exist') }}"
+          - "VM Instance State:            {{ item.state.name }}"          
+      loop: "{{ gcp_instance_info.instances }}"
+      loop_control:
+        label: "Display the VM information that we desire"
