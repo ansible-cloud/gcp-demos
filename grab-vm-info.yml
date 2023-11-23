@@ -22,8 +22,8 @@
 
     - name: Display GCP VM Detailed information to terminal
       ansible.builtin.debug:
-      when: item.status == "RUNNING"
         msg:
+          - "Display the GCP VM information that we desire"
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
 #          - "VM VPC Network:               {{ item['networkInterfaces']['subnetwork'] }}"         
           - "VM Instance ID:               {{ item.id }}"
@@ -32,5 +32,6 @@
           - "VM Instance Public IP:        {{ item['networkInterfaces']['accessConfigs']['natIP'] | default('The *Public IP Address* Does not exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
-      loop_control:
-        label: "Display the VM information that we desire"
+      when: item.status == "RUNNING"
+      # loop_control:
+      #   label: "Display the VM information that we desire"
