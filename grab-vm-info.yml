@@ -27,7 +27,7 @@
           - "VM Instance ID:               {{ item.id }}"
           - "VM Tags:                      {{ item.tags.items }}"
           - "VM Labels:                    {{ item.labels }}"   
-          - "VM Instance Private IP:       {{ item.networkInterfaces.networkIP }}"
+#          - "VM Instance Private IP:       {{ item.networkInterfaces.networkIP }}"
           - "VM Instance Public IP:        {{ item.networkInterfaces.accessConfigs.natIP | default('The *Public IP Address* Does not exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
