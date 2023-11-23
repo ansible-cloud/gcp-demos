@@ -24,7 +24,6 @@
       ansible.builtin.debug:
         msg:
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
-          - "VM Instance HostName:         {{ item.hostname | default('The tag *HostName* Does not exist') }}"
 #          - "VM VPC Network:               {{ item.networkInterfaces['subnetwork'] }}"         
           - "VM Instance ID:               {{ item.id }}"
           - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"   
@@ -32,5 +31,6 @@
           - "VM Instance Public IP:        {{ item.networkInterfaces['accessConfigs']['natIP'] | default('The *Public IP Address* Does not exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
+      when: item.status == "RUNNING"
       loop_control:
         label: "Display the VM information that we desire"
