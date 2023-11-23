@@ -25,7 +25,6 @@
         msg:
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
           - "VM Instance ID:               {{ item.id }}"
-          - "VM VPC ID:                    {{ item.vpc_id }}"
           - "VM Tags:                      {{ item.tags.items }}"
           - "VM Labels:                    {{ item.labels }}"   
           - "VM Instance Private IP:       {{ item.networkInterfaces.networkIP }}"
