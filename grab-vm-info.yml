@@ -32,6 +32,6 @@
           - "VM Instance Public IP:        {{ item['networkInterfaces']['accessConfigs']['natIP'] | default('The *Public IP Address* Does not exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
-      when: item.status == "RUNNING"
-      # loop_control:
-      #   label: "Display the VM information that we desire"
+      # when: item.status == "RUNNING"
+      loop_control:
+        label: "Display the VM information that we desire"
