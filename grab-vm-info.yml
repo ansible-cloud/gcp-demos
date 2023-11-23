@@ -20,12 +20,12 @@
       ansible.builtin.debug:
         msg: "{{ gcp_instance_info.resources }}"
 
-    - name: Display GCP VM information to terminal
+    - name: Display GCP VM Detailed information to terminal
       ansible.builtin.debug:
         msg:
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
           - "VM Instance HostName:         {{ item.hostname | default('The tag *HostName* Does not exist') }}"
-          - "VM VPC Network:               {{ item.networkInterfaces['subnetwork'] }}"         
+#          - "VM VPC Network:               {{ item.networkInterfaces['subnetwork'] }}"         
           - "VM Instance ID:               {{ item.id }}"
           - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"   
           - "VM Instance Private IP:       {{ item.networkInterfaces['networkIP'] | default('The *Private IP Address* Does not exist') }}"
