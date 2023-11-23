@@ -27,8 +27,8 @@
 #          - "VM VPC Network:               {{ item['networkInterfaces']['subnetwork'] }}"         
           - "VM Instance ID:               {{ item.id }}"
           - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"   
-          - "VM Instance Private IP:       {{ item.['networkInterfaces']['networkIP'] | default('The *Private IP Address* Does not exist') }}"
-          - "VM Instance Public IP:        {{ item.['networkInterfaces']['accessConfigs']['natIP'] | default('The *Public IP Address* Does not exist') }}"
+          - "VM Instance Private IP:       {{ item['networkInterfaces']['networkIP'] | default('The *Private IP Address* Does not exist') }}"
+          - "VM Instance Public IP:        {{ item['networkInterfaces']['accessConfigs']['natIP'] | default('The *Public IP Address* Does not exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
       loop_control:
