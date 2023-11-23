@@ -11,8 +11,10 @@
 
     - name: Retrieve info for the GCP VM instances
       google.cloud.gcp_compute_instance_info:
+        zone: "{{ gcp_zone }}"
         region: "{{ gcp_region }}"
         project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
       register: gcp_instance_info
 
     - name: Display GCP VM information to terminal
