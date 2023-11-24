@@ -1,0 +1,25 @@
+---
+- name: Grab some specific details about the GCP VM instances and display them
+  host: "{{ HOST }}"
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+      register: gcp_instance_info
+
+    - name: Stop the desired GCP VM instance
+      google.cloud.gcp_compute_instance:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+        name: " {{ item.name }}" 
+        state: stopped
+      loop: "{{ gcp_instance_info.resources }}"
+      when: item.name == "{{ HOST }}"
+      loop_control:
+        label: "STOPPING the VM information that we desire"
