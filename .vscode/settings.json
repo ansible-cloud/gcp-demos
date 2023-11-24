@@ -3,7 +3,9 @@
         "kubernetes": "*.yaml ",
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
             "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gke-cluster.yml",
-            "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gcp-instance.yml"
+            "file:///Users/hmourad/Documents/GitHub/gcp-demos/create-gcp-instance.yml",
+            "file:///Users/hmourad/Documents/GitHub/gcp-demos/remove-applications.yml"
         ]
-    }
+    },
+    "ansible.python.interpreterPath": "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3"
 }
