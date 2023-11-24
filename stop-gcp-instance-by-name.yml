@@ -17,9 +17,9 @@
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
-        name: " {{ item.name }}" 
+        name: " {{ vm_name }}" 
         status: TERMINATED
-      loop: "{{ gcp_instance_info.resources }}"
-      when: item.name == "{{ vm_name }}"
-      loop_control:
-        label: "STOPPING the GCP VM that we desire"
+      # loop: "{{ gcp_instance_info.resources }}"
+      # when: item.name == "{{ vm_name }}"
+      # loop_control:
+      #   label: "STOPPING the GCP VM that we desire"
