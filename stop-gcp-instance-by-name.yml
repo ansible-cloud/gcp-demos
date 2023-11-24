@@ -22,4 +22,4 @@
       loop: "{{ gcp_instance_info.resources }}"
       when: item.name == "{{ HOST }}"
       loop_control:
-        label: "STOPPING the VM information that we desire"
+        label: "STOPPING the GCP VM that we desire"
