@@ -1,6 +1,6 @@
 ---
 - name: Grab some specific details about the GCP VM instances and display them
-  hosts: GoogleCloudInventory
+  hosts: localhost
   gather_facts: false
 
   tasks:
