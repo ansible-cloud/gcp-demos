@@ -5,8 +5,6 @@
   gather_facts: false
   vars:
     vm_region: "{{ gcp_region | default('us-east1') }}"
-    filter_input: |
-      "Label:Name": "rhel*"
 
   tasks:
 
