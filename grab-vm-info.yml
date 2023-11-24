@@ -3,9 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  vars:
-    vm_region: "{{ gcp_region | default('us-east1') }}"
-    filter_tag: "{{ your_tag | default('*')}}"
+  # vars:
+  #   vm_region: "{{ gcp_region | default('us-east1') }}"
+  #   filter_tag: "{{ your_tag | default('*')}}"
 
   tasks:
     - name: Retrieve info for the GCP VM instances
