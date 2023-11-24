@@ -5,7 +5,8 @@
   gather_facts: false
   vars:
     vm_region: "{{ gcp_region | default('us-east1') }}"
-    filter_tag: "{{ your_tag | default('*')}}"
+    filter_input: |
+      "Label:Name": "rhel*"
 
   tasks:
 
@@ -13,6 +14,7 @@
       google.cloud.gcp_compute_instance_info:
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
+        filters: "{{ filter_input | from_yaml }}"
         auth_kind: serviceaccount
       register: gcp_instance_info
 
