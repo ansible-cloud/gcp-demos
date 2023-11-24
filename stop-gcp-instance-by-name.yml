@@ -1,6 +1,6 @@
 ---
 - name: Grab some specific details about the GCP VM instances and display them
-  host: "{{ HOST }}"
+  hosts: localhost
   connection: local
   gather_facts: false
 
@@ -20,6 +20,6 @@
         name: " {{ item.name }}" 
         state: stopped
       loop: "{{ gcp_instance_info.resources }}"
-      when: item.name == "{{ HOST }}"
+      when: item.name == "{{ vm_name }}"
       loop_control:
         label: "STOPPING the GCP VM that we desire"
