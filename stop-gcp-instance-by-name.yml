@@ -1,9 +1,12 @@
 ---
 - name: Grab some specific details about the GCP VM instances and display them
   hosts: "{{ vm_name }}"
+  become: true
+  become_user: root
   gather_facts: false
   
   tasks:
     - name: Stop the desired GCP VM instance
+      hosts: "{{ vm_name }}"
       community.general.shutdown:
         delay: 3
