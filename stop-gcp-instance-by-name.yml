@@ -1,7 +1,6 @@
 ---
 - name: Grab some specific details about the GCP VM instances and display them
-  hosts: localhost
-  connection: local
+  hosts: GoogleCloudInventory
   gather_facts: false
 
   tasks:
@@ -15,11 +14,12 @@
     - name: Stop the desired GCP VM instance
       google.cloud.gcp_compute_instance:
         name: "{{ vm_name }}"
-        # machine_type: n1-standard-1      
+        machine_type: n1-standard-1      
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
         status: STOPPING
+        deletion_protection: true
 
       # loop: "{{ gcp_instance_info.resources }}"
       # when: item.name == "{{ vm_name }}"
