@@ -18,7 +18,7 @@
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
         name: " {{ item.name }}" 
-        state: stopped
+        status: TERMINATED
       loop: "{{ gcp_instance_info.resources }}"
       when: item.name == "{{ vm_name }}"
       loop_control:
