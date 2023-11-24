@@ -12,7 +12,6 @@
       google.cloud.gcp_compute_instance_info:
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
-        filters: "{{ filter_input | from_yaml }}"
         auth_kind: serviceaccount
       register: gcp_instance_info
 
@@ -25,7 +24,6 @@
       debug:
         msg:
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"     
-          - "VM Instance ID:               {{ item.id }}"
           - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"        
 
       loop: "{{ gcp_instance_info.resources }}"
