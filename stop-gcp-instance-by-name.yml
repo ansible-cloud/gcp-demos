@@ -19,7 +19,7 @@
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
-        state: TERMINATED
+        status: STOPPING
 
       # loop: "{{ gcp_instance_info.resources }}"
       # when: item.name == "{{ vm_name }}"
