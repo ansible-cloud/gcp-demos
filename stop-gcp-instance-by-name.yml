@@ -21,11 +21,10 @@
   #     loop: "{{ gcp_instance_info.resources }}"
   #     when: item.name == "{{ vm_name }}"
   #
-hosts: 
-  - "{{ vm_name }}"
+#hosts: "{{ vm_name }}"
+hosts: vmtest01
 gather_facts: false
 become: yes
 tasks:
   - name: Shuting down a GCP vm by name
-    community.general.shutdown:
-      delay: 3
+    ansible.builtin.command: "shutdown -h now"
