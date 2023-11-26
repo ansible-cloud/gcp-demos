@@ -1,12 +1,24 @@
 ---
 - name: Grab some specific details about the GCP VM instances and display them
-  hosts: "{{ vm_name }}"
-  become: true
-  become_user: root
+  hosts: localhost
   gather_facts: false
-  
+
   tasks:
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+      register: gcp_instance_info
+
     - name: Stop the desired GCP VM instance
-      hosts: "{{ vm_name }}"
-      community.general.shutdown:
-        delay: 3
+      google.cloud.gcp_compute_instance:
+        name: "{{ vm_name }}"
+        # machine_type: n1-standard-1      
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+        status: STOPPING
+        deletion_protection: true
+      loop: "{{ gcp_instance_info.resources }}"
+      when: item.name == "{{ vm_name }}"
