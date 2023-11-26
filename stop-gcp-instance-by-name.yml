@@ -3,7 +3,7 @@
   hosts: "{{ vm_name }}"
   gather_facts: false
   become: yes
-  become_user: "{{ becomeuser }}"
+  become_user: root
   tasks:
     - name: Shuting down a GCP vm by name
       ansible.builtin.command: "shutdown -h now"
