@@ -6,7 +6,6 @@
   become_user: root
   tasks:
     - name: Shuting down a GCP vm by name
-      #ansible.builtin.command: "shutdown -h now"
       community.general.shutdown:
         delay: 2
   #
@@ -30,4 +29,3 @@
   #       deletion_protection: true
   #     loop: "{{ gcp_instance_info.resources }}"
   #     when: item.name == "{{ vm_name }}"
-
