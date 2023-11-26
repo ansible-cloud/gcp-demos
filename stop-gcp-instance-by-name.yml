@@ -18,6 +18,8 @@
         machine_type: n1-standard-1
         disks:
         - auto_delete: 'false'
+          initialize_params:
+            disk_type: local-ssd
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
