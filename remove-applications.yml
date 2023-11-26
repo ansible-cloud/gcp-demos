@@ -1,0 +1,32 @@
+---
+- name: Application REMOVAL Playbook
+  hosts: "{{ HOSTS }}"
+  gather_facts: false
+  become: true
+  
+  tasks:
+    - name: Make sure application is not empty
+      ansible.builtin.assert:
+        that:
+          - "application != '' "
+
+    - name: Print to terminal the application to be removed
+      ansible.builtin.debug:
+        msg: "This Ansible Playbook will remove {{application}}"
+
+    - name: Remove the application(s)
+      ansible.builtin.dnf:
+        name: "{{application}}"
+        allow_downgrade: true
+        state: absent
+      register: result
+
+    - name: Print to terminal the applications that have been removed
+      ansible.builtin.debug:
+        msg: "The application: {{application}} has/have been removed"
+      when: result.changed|bool
+
+    - name: Print to terminal the applications that are already previously removed 
+      ansible.builtin.debug:
+        msg: "The application: {{application}} was/were already removed"
+      when: not result.changed|bool

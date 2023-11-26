@@ -1,0 +1,38 @@
+---
+- name: Grab the Labels on the VM instances and display them
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    vm_region: "{{ gcp_region | default('us-east1') }}"
+
+  tasks:
+
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+      register: gcp_instance_info
+
+    - name: Display GCP VM info and Labels information to terminal
+      debug:
+        msg:
+          - "There are {{ gcp_instance_info.resources | length }} instances that match your filter"
+
+    - name: Display GCP VM info and Labels information to terminal
+      debug:
+        msg:
+          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"     
+          - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"        
+
+      loop: "{{ gcp_instance_info.resources }}"
+      loop_control:
+        label: "VM info and associated Labels"
+
+    - name: save the instances to be used in a workflow variable for following job templates
+      ansible.builtin.set_stats:
+        data:
+          identified_instances: "{{ gcp_instance_info.resources | map(attribute='id') | list }}"
+        per_host: false
+      when: gcp_instance_info.resources | length > 0

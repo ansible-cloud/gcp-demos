@@ -9,7 +9,7 @@
         name: "{{ project_name }}"
         id: ansibletest-{{ 10000000000 | random }}
         auth_kind: serviceaccount
-        parent: 
+        parent:
           id: "{{ parent_resource_id }}"
           type: "{{ parent_resource_type }}"
         state: present

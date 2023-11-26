@@ -1,0 +1,29 @@
+---
+- name: Grab some specific details about the GCP VM instances and display them
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  # vars:
+  #   vm_region: "{{ gcp_region | default('us-east1') }}"
+  #   filter_tag: "{{ your_tag | default('*')}}"
+
+  tasks:
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+      register: gcp_instance_info
+
+    - name: Display GCP VM Detailed information to terminal
+      ansible.builtin.debug:
+        msg:
+          - "Display the GCP VM information that we desire for {{ item.name }}"
+          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"     
+          - "VM Instance ID:               {{ item.id }}"
+          - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"
+          - "VM Instance State:            {{ item.status }}"
+      loop: "{{ gcp_instance_info.resources }}"
+      when: item.status == "RUNNING"
+      loop_control:
+        label: "Display the VM information that we desire"

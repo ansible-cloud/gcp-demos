@@ -1,0 +1,31 @@
+---
+- name: Destroy GCP VMs by name
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Destroy a VM instance
+      google.cloud.gcp_compute_instance:
+        name: "{{ vm_name }}"
+        labels:
+          environment: production
+        zone: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: absent
+
+    - name: Destroy an IPv4 public IP address
+      google.cloud.gcp_compute_address:
+        name: "{{ vm_name }}-ip"
+        region: "{{ gcp_region }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: absent
+
+    - name: Destroy a disk mapped from a vm image
+      google.cloud.gcp_compute_disk:
+        name: "{{ vm_name }}-disk"
+        zone: "{{ gcp_zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: absent
