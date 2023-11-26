@@ -20,7 +20,9 @@
   #       deletion_protection: true
   #     loop: "{{ gcp_instance_info.resources }}"
   #     when: item.name == "{{ vm_name }}"
-hosts: "{{ vm_name }}"
+  #
+hosts: 
+  - "{{ vm_name }}"
 gather_facts: false
 become: yes
 tasks:
