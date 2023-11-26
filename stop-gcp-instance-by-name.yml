@@ -6,7 +6,9 @@
   become_user: root
   tasks:
     - name: Shuting down a GCP vm by name
-      ansible.builtin.command: "shutdown -h now"
+      #ansible.builtin.command: "shutdown -h now"
+      community.general.shutdown:
+        delay: 2
   #
   # hosts: localhost
   # gather_facts: false
