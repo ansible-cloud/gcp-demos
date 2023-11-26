@@ -19,9 +19,9 @@
       ansible.builtin.debug:
         msg:
           - "Display the GCP VM information that we desire for {{ item.name }}"
-          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"     
+          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
           - "VM Instance ID:               {{ item.id }}"
-          - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"
+          - "VM Labels:                    {{ item.labels | default('NO *Labels* exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
       when: item.status == "RUNNING"
