@@ -1,5 +1,12 @@
 ---
 - name: Shutdown a GCP vm instance by name
+  hosts: "{{ vm_name }}"
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Shuting down a GCP vm by name
+      ansible.builtin.command: "shutdown -h now"
+  #
   # hosts: localhost
   # gather_facts: false
   # tasks:
@@ -20,11 +27,4 @@
   #       deletion_protection: true
   #     loop: "{{ gcp_instance_info.resources }}"
   #     when: item.name == "{{ vm_name }}"
-  #
-#hosts: "{{ vm_name }}"
-hosts: vmtest01
-gather_facts: false
-become: yes
-tasks:
-  - name: Shuting down a GCP vm by name
-    ansible.builtin.command: "shutdown -h now"
+
