@@ -3,16 +3,20 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  # vars:
-  #   vm_region: "{{ gcp_region | default('us-east1') }}"
+  vars:
+  vm_region: "{{ gcp_region | default('us-east1') }}"
   #   filter_tag: "{{ your_tag | default('*')}}"
 
   tasks:
     - name: Retrieve info for the GCP VM instances
       google.cloud.gcp_compute_instance_info:
         project: "{{ gcp_project }}"
-        zone: "{{ gcp_zone }}"
+        zone: "{{ item }}"
         auth_kind: serviceaccount
+      loop:
+        - us-east1-b
+        - us-east1-c
+        - us-east1-d
       register: gcp_instance_info
 
     - name: Display GCP VM Detailed information to terminal
