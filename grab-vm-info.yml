@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   vars:
-  vm_region: "{{ gcp_region | default('us-east1') }}"
+  gcp_region: "{{ us-east1 | default('us-east1') }}"
   #   filter_tag: "{{ your_tag | default('*')}}"
 
   tasks:
