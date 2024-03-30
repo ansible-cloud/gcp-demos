@@ -8,8 +8,8 @@
   tasks:
     - name: Retrieve info for the GCP VM instances
       google.cloud.gcp_compute_instance_info:
-        project: "{{ gcp_project }}"
         zone: "{{ item }}"
+        project: "{{ gcp_project }}"
         auth_kind: serviceaccount
       loop:
         - us-east1-b
