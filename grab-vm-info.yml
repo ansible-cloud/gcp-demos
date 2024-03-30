@@ -4,8 +4,6 @@
   connection: local
   gather_facts: false
   vars:
-  gcp_region: "{{ us-east1 | default('us-east1') }}"
-  #   filter_tag: "{{ your_tag | default('*')}}"
 
   tasks:
     - name: Retrieve info for the GCP VM instances
