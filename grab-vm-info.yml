@@ -24,6 +24,6 @@
           - "VM Labels:                    {{ item.labels | default('NO *Labels* exist') }}"
           - "VM Instance State:            {{ item.status }}"
       loop: "{{ gcp_instance_info.resources }}"
-      when: item.status == "RUNNING"
+#      when: item.status == "RUNNING"
       loop_control:
         label: "Display the VM information that we desire"
