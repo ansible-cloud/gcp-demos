@@ -31,3 +31,4 @@
         deletion_protection: false
 #      loop: "{{ gcp_instance_info.resources }}"
       when: gcp_instance_info.resources[0].name == testgc01
+      loop: "{{ gcp_instance_info.resources }}"
