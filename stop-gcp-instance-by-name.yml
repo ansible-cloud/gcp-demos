@@ -22,11 +22,11 @@
 
     - name: Stop the desired GCP VM instance
       google.cloud.gcp_compute_instance:
-#        name: "{{ vm_name }}"
+       name: "{{ vm_name }}"
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         auth_kind: serviceaccount
         status: "TERMINATED"
         deletion_protection: false
       loop: "{{ gcp_instance_info.resources }}"
-      when: gcp_instance_info.resources[0].name == "{{ vm_name }}"
+      when: gcp_instance_info.resources[0].name == name
