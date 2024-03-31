@@ -31,7 +31,8 @@
         disks:
         - auto_delete: 'true'
         auth_kind: serviceaccount
-        status: "TERMINATED"
+        status: TERMINATED
+        state: present
 #      loop: "{{ gcp_instance_info.resources }}"
       # when: gcp_instance_info.resources[0].name == vmname
       # loop: "{{ gcp_instance_info.resources }}"
