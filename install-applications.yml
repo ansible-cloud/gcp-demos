@@ -31,3 +31,4 @@
       ansible.builtin.debug:
         msg: "The application: {{application}} was/were ALREADY INSTALLED"
       when: not result.changed|bool
+      
