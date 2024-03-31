@@ -3,7 +3,7 @@
   hosts: "{{ vm_name }}"
   gather_facts: false
   become: yes
-  become_user: root
+  become_user: hmourad
 #
   tasks:
     - name: Shuting down a GCP RHEL vm by name
