@@ -26,9 +26,11 @@
       google.cloud.gcp_compute_instance:
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
+        name: "{{ vm_name }}" 
         auth_kind: serviceaccount
         status: "TERMINATED"
+        state: "stopped"
         deletion_protection: false
 #      loop: "{{ gcp_instance_info.resources }}"
-      when: gcp_instance_info.resources[0].name == vmname
-      loop: "{{ gcp_instance_info.resources }}"
+      # when: gcp_instance_info.resources[0].name == vmname
+      # loop: "{{ gcp_instance_info.resources }}"
