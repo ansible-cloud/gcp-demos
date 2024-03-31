@@ -1,0 +1,33 @@
+---
+- name: Application INSTALLATION Playbook
+  hosts: "{{ HOSTS }}"
+  gather_facts: false
+  become: true
+  become_user: root
+  
+  tasks:
+    - name: Make sure the application list is not empty
+      ansible.builtin.assert:
+        that:
+          - "application != '' "
+
+    - name: Print to terminal the application to be INSTALLED
+      ansible.builtin.debug:
+        msg: "This Ansible Playbook will INSTALL {{application}}"
+
+    - name: INSTALL the application(s)
+      ansible.builtin.dnf:
+        name: "{{application}}"
+        allow_downgrade: true
+        state: present
+      register: result
+
+    - name: Print to terminal the applications that have been Installed
+      ansible.builtin.debug:
+        msg: "The application: {{application}} has/have been INSTALLED"
+      when: result.changed|bool
+
+    - name: Print to terminal the applications that are already previously Installed 
+      ansible.builtin.debug:
+        msg: "The application: {{application}} was/were ALREADY INSTALLED"
+      when: not result.changed|bool
