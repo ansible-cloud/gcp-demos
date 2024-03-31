@@ -5,7 +5,7 @@
 #
   tasks:
     - name: Shuting down a GCP RHEL vm by name
-      ansible.builtn.command: "shutdown -h now"
+      ansible.builtin.command: "shutdown -h now"
 #
     # - name: Retrieve info for the GCP VM instances
     #   google.cloud.gcp_compute_instance_info:
