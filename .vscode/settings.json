@@ -7,5 +7,7 @@
             "file:///Users/hmourad/Documents/GitHub/gcp-demos/remove-applications.yml"
         ]
     },
-    "ansible.python.interpreterPath": "/usr/local/bin/python3.12"
+    "ansible.python.interpreterPath": "/usr/local/bin/python3.12",
+    "ansible.lightspeed.enabled": true,
+    "ansible.lightspeed.suggestions.enabled": true
 }
