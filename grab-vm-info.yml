@@ -3,7 +3,6 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  vars:
 
   tasks:
     - name: Retrieve info for the GCP VM instances
