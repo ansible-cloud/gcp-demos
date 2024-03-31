@@ -5,8 +5,8 @@
   gather_facts: false
   # become: yes
   # become_user: root
-  vars:
-    vmname: "{{ vm_name }}"
+  # vars:
+  #   vmname: "{{ vm_name }}"
   tasks:
     # - name: Shuting down a GCP vm by name
     #   community.general.shutdown:
@@ -29,5 +29,5 @@
         auth_kind: serviceaccount
         status: "TERMINATED"
         deletion_protection: false
-      loop: "{{ gcp_instance_info.resources }}"
-      when: gcp_instance_info.resources[0].name == "{{ vmname }}"
+#      loop: "{{ gcp_instance_info.resources }}"
+      when: gcp_instance_info.resources[0].name == "{{ vm_name }}"
