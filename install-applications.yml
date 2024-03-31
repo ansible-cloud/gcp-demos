@@ -18,7 +18,6 @@
     - name: INSTALL the application(s)
       ansible.builtin.dnf:
         name: "{{application}}"
-        allow_downgrade: true
         state: present
       register: result
 
@@ -31,4 +30,3 @@
       ansible.builtin.debug:
         msg: "The application: {{application}} was/were ALREADY INSTALLED"
       when: not result.changed|bool
-      
