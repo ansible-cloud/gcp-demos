@@ -6,6 +6,7 @@
   tasks:
     - name: Shuting down a GCP vm by name
       community.general.shutdown:
+        msg: "Shut down initiated by Ansible"
         delay: 2
 #
     # - name: Retrieve info for the GCP VM instances
