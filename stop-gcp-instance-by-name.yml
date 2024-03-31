@@ -5,27 +5,27 @@
   become: yes
   become_user: root
   tasks:
-    - name: Shuting down a GCP vm by name
-      community.general.shutdown:
-        delay: 2
+    # - name: Shuting down a GCP vm by name
+    #   community.general.shutdown:
+    #     delay: 2
   #
   # hosts: localhost
   # gather_facts: false
   # tasks:
-  #   - name: Retrieve info for the GCP VM instances
-  #     google.cloud.gcp_compute_instance_info:
-  #       project: "{{ gcp_project }}"
-  #       zone: "{{ gcp_zone }}"
-  #       auth_kind: serviceaccount
-  #     register: gcp_instance_info
+    - name: Retrieve info for the GCP VM instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+      register: gcp_instance_info
 
-  #   - name: Stop the desired GCP VM instance
-  #     google.cloud.gcp_compute_instance:
-  #       name: "{{ vm_name }}"
-  #       project: "{{ gcp_project }}"
-  #       zone: "{{ gcp_zone }}"
-  #       auth_kind: serviceaccount
-  #       status: "TERMINATED"
-  #       deletion_protection: true
-  #     loop: "{{ gcp_instance_info.resources }}"
-  #     when: item.name == "{{ vm_name }}"
+    - name: Stop the desired GCP VM instance
+      google.cloud.gcp_compute_instance:
+        name: "{{ vm_name }}"
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+        status: "TERMINATED"
+        deletion_protection: false
+      loop: "{{ gcp_instance_info.resources }}"
+      when: item.name == "{{ vm_name }}"
