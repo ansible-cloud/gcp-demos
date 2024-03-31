@@ -21,7 +21,7 @@
           - "VM Labels:                    {{ item.labels | default('NO *Labels* exist') }}"
           - "VM Instance State:            {{ item.status }}"
           - "VM Machine Type:              {{ item.machineType }}"
-          - "VM Private IP:                {{ item.networkInterfaces[0].networkIP }}"
+          - "VM Private IP:                {{ item.networkInterfaces[0].networkIP | default('NO *Private IP* exist') }}"
           - "VM Public IP:                 {{ item.networkInterfaces[0].accessConfigs[0].natIP | default('NO *Public IP* exist') }}"          
       loop: "{{ gcp_instance_info.resources }}"
 #      when: item.status == "RUNNING"
