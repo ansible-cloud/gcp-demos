@@ -12,6 +12,7 @@
 #
     - name: Stop Google Cloud VM instance
       ansible.builtin.command: >-
+        gcloud auth login "{{ GCP_SERVICE_ACCOUNT_EMAIL }}"
         gcloud compute instances stop {{ vm_name }} --zone {{ gcp_zone }} --async --quiet --discard-local-ssd=true --project "{{ gcp_project }}"
 #
     # - name: Retrieve info for the GCP VM instances
