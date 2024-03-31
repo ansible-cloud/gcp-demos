@@ -27,11 +27,11 @@
         project: "{{ gcp_project }}"
         zone: "{{ gcp_zone }}"
         name: "{{ vm_name }}" 
+        deletion_protection: false
+        disks:
+        - auto_delete: 'true'
         auth_kind: serviceaccount
         status: "TERMINATED"
-#        state: "stopped"
-        deletion_protection: false
-        discard-local-ssd: true
 #      loop: "{{ gcp_instance_info.resources }}"
       # when: gcp_instance_info.resources[0].name == vmname
       # loop: "{{ gcp_instance_info.resources }}"
