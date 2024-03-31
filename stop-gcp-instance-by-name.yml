@@ -1,7 +1,6 @@
 ---
 - name: Shutdown a GCP vm instance by name
   hosts: "{{ vm_name }}"
-  connection: local
   gather_facts: false
 #
   tasks:
