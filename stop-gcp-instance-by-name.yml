@@ -7,47 +7,6 @@
 #
   tasks:
     - name: Shuting down a GCP RHEL vm by name
-#      ansible.builtin.command: "shutdown -h now"
       community.general.shutdown:
         delay: 2
         msg: "Shut down initiated by Ansible"
-#
-    # - name: Retrieve info for the GCP VM instances
-    #   google.cloud.gcp_compute_instance_info:
-    #     project: "{{ gcp_project }}"
-    #     zone: "{{ gcp_zone }}"
-    #     auth_kind: serviceaccount
-    #   register: gcp_instance_info
-#
-    # - name: Stop Google Cloud VM instance
-    #   ansible.builtin.command: >-
-    #     gcloud compute instances stop {{ vm_name }} --zone {{ gcp_zone }} --async --quiet --discard-local-ssd=true --project "{{ gcp_project }}"
-#
-    # - name: Retrieve info for the GCP VM instances
-    #   google.cloud.gcp_compute_instance_info:
-    #     project: "{{ gcp_project }}"
-    #     zone: "{{ gcp_zone }}"
-    #     auth_kind: serviceaccount
-    #   register: gcp_instance_info
-#
-    # - name: Stop the desired GCP VM instance
-    #   google.cloud.gcp_compute_instance:
-    #     project: "{{ gcp_project }}"
-    #     zone: "{{ gcp_zone }}"
-    #     name: "{{ vm_name }}" 
-    #     deletion_protection: false
-    #     disks:
-    #     - auto_delete: true
-    #       boot: true
-    #     - auto_delete: 'true'
-    #       interface: NVME
-    #       type: SCRATCH
-    #       initialize_params:
-    #         disk_type: local-ssd
-    #     auth_kind: serviceaccount
-    #     state: present
-    #     status: TERMINATED
-#
-#      loop: "{{ gcp_instance_info.resources }}"
-      # when: gcp_instance_info.resources[0].name == vmname
-      # loop: "{{ gcp_instance_info.resources }}"
