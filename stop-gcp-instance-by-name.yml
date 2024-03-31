@@ -29,7 +29,7 @@
         name: "{{ vm_name }}" 
         auth_kind: serviceaccount
         status: "TERMINATED"
-        state: "stopped"
+#        state: "stopped"
         deletion_protection: false
 #      loop: "{{ gcp_instance_info.resources }}"
       # when: gcp_instance_info.resources[0].name == vmname
