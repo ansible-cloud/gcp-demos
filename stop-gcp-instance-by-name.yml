@@ -4,10 +4,8 @@
   gather_facts: false
 #
   tasks:
-    - name: Shuting down a GCP vm by name
-      community.general.shutdown:
-        msg: "Shut down initiated by Ansible"
-        delay: 2
+    - name: Shuting down a GCP RHEL vm by name
+      ansible.builtn.command: "shutdown -h now"
 #
     # - name: Retrieve info for the GCP VM instances
     #   google.cloud.gcp_compute_instance_info:
