@@ -1,6 +1,7 @@
 ---
 - name: Shutdown a GCP vm instance by name
-  hosts: "{{ vm_name }}"
+  hosts: localhost
+  connection: local
   gather_facts: false
   # become: yes
   # become_user: root
