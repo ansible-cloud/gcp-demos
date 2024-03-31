@@ -30,4 +30,4 @@
         status: "TERMINATED"
         deletion_protection: false
 #      loop: "{{ gcp_instance_info.resources }}"
-      when: gcp_instance_info.resources[0].name == "testgc01"
+      when: gcp_instance_info.resources[0].name == testgc01
