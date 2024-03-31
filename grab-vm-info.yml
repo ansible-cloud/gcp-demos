@@ -13,8 +13,6 @@
         auth_kind: serviceaccount
       loop:
         - us-east1-b
-        - us-east1-c
-        - us-east1-d
       register: gcp_instance_info
 
     - name: Display GCP VM Detailed information to terminal
