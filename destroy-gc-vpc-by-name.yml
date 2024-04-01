@@ -5,38 +5,38 @@
   gather_facts: false
   tasks:
 
-    # - name: Get information on a VPC Network
-    #   google.cloud.gcp_compute_network_info:
-    #     filters:
-    #     - name = "{{ vpc_name }}"
-    #     project: "{{ gcp_project }}"
-    #     auth_kind: serviceaccount
-    #   register: network
+    - name: Get information on a VPC Network
+      google.cloud.gcp_compute_network_info:
+        filters:
+        - name = "{{ vpc_name }}"
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+      register: network
 
-    # - name: DESTROY a firewall rule to allow SSH
-    #   google.cloud.gcp_compute_firewall:
-    #     name: allowssh
-    #     allowed:
-    #       - ip_protocol: tcp
-    #         ports:
-    #           - '22'
-    #           - '80'
-    #           - '443'
-    #     project: "{{ gcp_project }}"
-    #     network: "{{ network }}"
-    #     auth_kind: serviceaccount
-    #     state: absent
+    - name: DESTROY a firewall rule to allow SSH
+      google.cloud.gcp_compute_firewall:
+        name: allowssh
+        allowed:
+          - ip_protocol: tcp
+            ports:
+              - '22'
+              - '80'
+              - '443'
+        project: "{{ gcp_project }}"
+        network: "{{ network }}"
+        auth_kind: serviceaccount
+        state: absent
 
-    # - name: DESTROY a subnetwork
-    #   google.cloud.gcp_compute_subnetwork:
-    #     name: "{{ vpc_name }}-subnet"
-    #     region: "{{ gcp_region }}"
-    #     network: "{{ network }}"
-    #     ip_cidr_range: 172.16.0.0/16
-    #     project: "{{ gcp_project }}"
-    #     auth_kind: serviceaccount
-    #     state: absent
-#
+    - name: DESTROY a subnetwork
+      google.cloud.gcp_compute_subnetwork:
+        name: "{{ vpc_name }}-subnet"
+        region: "{{ gcp_region }}"
+        network: "{{ network }}"
+        ip_cidr_range: 172.16.0.0/16
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: absent
+
     - name: DESTROY a Virtual Private Cloud (VPC) network
       google.cloud.gcp_compute_network:
         name: "{{ vpc_name }}"
