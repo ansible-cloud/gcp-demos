@@ -27,7 +27,7 @@
 
     - name: Create a firewall rule to allow SSH
       google.cloud.gcp_compute_firewall:
-        name: allowssh
+        name: "{{ vpc_name }}-allowssh"
         allowed:
           - ip_protocol: tcp
             ports:
