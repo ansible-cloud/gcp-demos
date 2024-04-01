@@ -16,7 +16,7 @@
 
     - name: Create a subnetwork
       google.cloud.gcp_compute_subnetwork:
-        name: instancenet
+        name: "{{ vpc_name }}-subnet"
         region: "{{ gcp_region }}"
         network: "{{ network }}"
         ip_cidr_range: 172.16.0.0/16
