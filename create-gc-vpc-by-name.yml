@@ -1,0 +1,41 @@
+---
+- name: Create a Google Cloud Virtual Private Cloud (VPC)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: Create a Virtual Private Cloud (VPC) network
+      google.cloud.gcp_compute_network:
+        name: "{{ vpc_name }}"
+        auto_create_subnetworks: 'false'
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: network
+
+    - name: Create a subnetwork
+      google.cloud.gcp_compute_subnetwork:
+        name: "{{ vpc_name }}-subnet"
+        region: "{{ gcp_region }}"
+        network: "{{ network }}"
+        ip_cidr_range: 172.16.0.0/16
+        project: "{{ gcp_project }}"
+        auth_kind: serviceaccount
+        state: present
+      register: vpcsubnet
+
+    - name: Create a firewall rule to allow SSH
+      google.cloud.gcp_compute_firewall:
+        name: "{{ vpc_name }}-allowssh"
+        allowed:
+          - ip_protocol: tcp
+            ports:
+              - '22'
+              - '80'
+              - '443'
+        project: "{{ gcp_project }}"
+        network: "{{ network }}"
+        auth_kind: serviceaccount
+        state: present
+      register: sshallowed
