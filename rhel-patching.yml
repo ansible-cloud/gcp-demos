@@ -6,19 +6,19 @@
     report_server: reportsrvr1
   
   tasks:
-  - include_role:
+  - ansible.builtin.include_role:
       name: "demo.patching.patch_linux"
 
   - block:
 
-    - include_role:
+    - ansible.builtin.include_role:
         name: "{{ item }}"
       loop:
         - "demo.patching.report_server"
         - "demo.patching.report_linux"
         - "demo.patching.report_linux_patching"
 
-    - include_role:
+    - ansible.builtin.include_role:
         name: "demo.patching.report_server"
         tasks_from: linux_landing_page
         
