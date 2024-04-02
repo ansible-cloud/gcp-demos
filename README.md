@@ -3,9 +3,13 @@ Here are some sample playbooks to demonstrate the types of activities you can pe
 
 *  Gathering GCP VM instance information
 *  Creating GCP VM instances and associated resources
+*  Creating GCP VM instances by name
 *  Destroying GCP VM instances
+*  Destroying GCP VM instances by name
 *  Deploying Applications to Linux VMs
 *  Removing Applications from Linux VMs
 *  Patching Linux (RHEL) VMs
-*  Creating a Google Kubernetes Engine cluster
+*  Creating a Google Kubernetes Engine cluster GKE
 *  Destroying a GKE cluster
+*  Power ON a GCP VM instances by name
+*  Power OFF a GCP VM instances by name

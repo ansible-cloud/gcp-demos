@@ -4,7 +4,7 @@
   gather_facts: false
   become: yes
   become_user: root
-#
+
   tasks:
     - name: Shuting down a GCP RHEL vm by name
       community.general.shutdown:

@@ -25,7 +25,6 @@
         msg:
           - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
           - "VM Labels:                    {{ item.labels | default('NO *Labels exist') }}"
-
       loop: "{{ gcp_instance_info.resources }}"
       loop_control:
         label: "VM info and associated Labels"

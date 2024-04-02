@@ -6,6 +6,7 @@
     report_server: reportsrvr1
   
   tasks:
+
   - ansible.builtin.include_role:
       name: "demo.patching.patch_linux"
 

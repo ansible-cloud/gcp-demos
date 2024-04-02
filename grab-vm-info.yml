@@ -5,6 +5,7 @@
   gather_facts: false
 
   tasks:
+
     - name: Retrieve info for the GCP VM instances
       google.cloud.gcp_compute_instance_info:
         zone: "{{ gcp_zone }}"

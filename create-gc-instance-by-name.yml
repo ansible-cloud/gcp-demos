@@ -3,7 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
+
   tasks:
+
     - name: Create a disk mapped from a RHEL-9 image for the VM
       google.cloud.gcp_compute_disk:
         name: "{{ vm_name }}-disk"

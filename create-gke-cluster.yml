@@ -3,7 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
+
   tasks:
+
     - name: Create a GKE cluster
       google.cloud.gcp_container_cluster:
         name: gke-cluster01
@@ -26,4 +28,3 @@
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
         state: present
-#
