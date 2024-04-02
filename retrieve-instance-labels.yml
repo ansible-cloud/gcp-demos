@@ -30,9 +30,3 @@
       loop_control:
         label: "VM info and associated Labels"
 
-    - name: Save the instances to be used in a workflow variable for following job templates
-      ansible.builtin.set_stats:
-        data:
-          identified_instances: "{{ gcp_instance_info.resources | map(attribute='id') | list }}"
-        per_host: false
-      when: gcp_instance_info.resources | length > 0
