@@ -29,4 +29,3 @@
       loop: "{{ gcp_instance_info.resources }}"
       loop_control:
         label: "VM info and associated Labels"
-
