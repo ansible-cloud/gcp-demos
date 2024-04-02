@@ -1,0 +1,36 @@
+# ---
+# - name: Shutdown a GCP vm instance by name
+#   hosts: "{{ vm_name }}"
+#   gather_facts: false
+#   become: yes
+#   become_user: root
+# #
+#   tasks:
+#     - name: Shuting down a GCP RHEL vm by name
+#       community.general.shutdown:
+#         delay: 2
+#         msg: "Shut down initiated by Ansible"
+# #
+---
+- name: Power ON a GCP vm instance by name
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    # - name: Retrieve info for the GCP VM instances
+    #   google.cloud.gcp_compute_instance_info:
+    #     project: "{{ gcp_project }}"
+    #     zone: "{{ gcp_zone }}"
+    #     auth_kind: serviceaccount
+    #   register: gcp_instance_info
+
+    - name: Power On the desired GCP VM instance
+      google.cloud.gcp_compute_instance:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        name: "{{ vm_name }}"
+        auth_kind: serviceaccount
+        status: "RUNNING"
+        deletion_protection: false
+#      when: gcp_instance_info.resources[0].name == "{{ vm_name }}"
