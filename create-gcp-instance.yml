@@ -3,7 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
+
   tasks:
+
     - name: Create a disk mapped from a RHEL-9 image for rhel1
       google.cloud.gcp_compute_disk:
         name: rhel1d

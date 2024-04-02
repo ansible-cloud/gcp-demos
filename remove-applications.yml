@@ -6,6 +6,7 @@
   become_user: root
   
   tasks:
+
     - name: Make sure application is not empty
       ansible.builtin.assert:
         that:

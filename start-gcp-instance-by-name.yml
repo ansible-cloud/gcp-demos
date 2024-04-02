@@ -1,0 +1,15 @@
+---
+- name: Power ON a GCP VM instance by name
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Power ON the desired GCP VM instance
+      google.cloud.gcp_compute_instance:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        name: "{{ vm_name }}"
+        auth_kind: serviceaccount
+        status: "RUNNING"

@@ -3,7 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
+
   tasks:
+
     - name: Create a Google Cloud Project
       google.cloud.gcp_resourcemanager_project:
         name: "{{ project_name }}"

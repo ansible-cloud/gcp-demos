@@ -5,6 +5,7 @@
   gather_facts: false
 
   tasks:
+
     - name: Retrieve info for the GCP VM instances
       google.cloud.gcp_compute_instance_info:
         zone: "{{ gcp_zone }}"
@@ -22,7 +23,7 @@
           - "VM Instance State:            {{ item.status }}"
           - "VM Machine Type:              {{ item.machineType }}"
           - "VM Private IP:                {{ item.networkInterfaces[0].networkIP | default('NO *Private IP* exist') }}"
-          - "VM Public IP:                 {{ item.networkInterfaces[0].accessConfigs[0].natIP | default('NO *Public IP* exist') }}"          
+          - "VM Public IP:                 {{ item.networkInterfaces[0].accessConfigs[0].natIP | default('NO *Public IP* exist') }}"
       loop: "{{ gcp_instance_info.resources }}"
 #      when: item.status == "RUNNING"
       loop_control:
