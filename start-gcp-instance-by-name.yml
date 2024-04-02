@@ -32,5 +32,4 @@
         name: "{{ vm_name }}"
         auth_kind: serviceaccount
         status: "RUNNING"
-        deletion_protection: false
 #      when: gcp_instance_info.resources[0].name == "{{ vm_name }}"

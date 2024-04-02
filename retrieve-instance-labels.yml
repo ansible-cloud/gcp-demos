@@ -16,21 +16,21 @@
       register: gcp_instance_info
 
     - name: Display GCP VM info and Labels information to terminal
-      debug:
+      ansible.builtin.debug:
         msg:
           - "There are {{ gcp_instance_info.resources | length }} instances that match your filter"
 
     - name: Display GCP VM info and Labels information to terminal
-      debug:
+      ansible.builtin.debug:
         msg:
-          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"     
-          - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"        
+          - "VM Instance Name:             {{ item.name | default('The tag *Name* Does not exist') }}"
+          - "VM Labels:                    {{ item.labels  | default('NO *Labels exist') }}"
 
       loop: "{{ gcp_instance_info.resources }}"
       loop_control:
         label: "VM info and associated Labels"
 
-    - name: save the instances to be used in a workflow variable for following job templates
+    - name: Save the instances to be used in a workflow variable for following job templates
       ansible.builtin.set_stats:
         data:
           identified_instances: "{{ gcp_instance_info.resources | map(attribute='id') | list }}"

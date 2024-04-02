@@ -8,7 +8,7 @@
     - name: Get information on a VPC Network
       google.cloud.gcp_compute_network_info:
         filters:
-        - name = "{{ vpc_name }}"
+          - name = "{{ vpc_name }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
       register: network
