@@ -84,7 +84,7 @@
     - name: Create the rhel1 VM instances
       google.cloud.gcp_compute_instance:
         name: rhel1
-        machine_type: n1-standard-1
+        machine_type: n2-standard-2
         disks:
           - auto_delete: 'true'
             boot: 'true'
@@ -111,7 +111,7 @@
     - name: Create the rhel2 VM instances
       google.cloud.gcp_compute_instance:
         name: rhel2
-        machine_type: n1-standard-1
+        machine_type: n2-standard-2
         disks:
           - auto_delete: 'true'
             boot: 'true'

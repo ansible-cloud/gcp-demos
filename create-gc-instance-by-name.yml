@@ -64,7 +64,7 @@
     - name: Create the VM instances
       google.cloud.gcp_compute_instance:
         name: "{{ vm_name }}"
-        machine_type: n1-standard-1
+        machine_type: n2-standard-2
         disks:
           - auto_delete: 'true'
             boot: 'true'
