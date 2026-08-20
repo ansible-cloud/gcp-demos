@@ -25,7 +25,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "projects/rhel-cloud/global/images/rhel-9-v20250311"
+      image = "projects/rhel-cloud/global/images/rhel-9-v20260811"
       size  = 40
     }
   }
