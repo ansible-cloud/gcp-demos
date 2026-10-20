@@ -10,7 +10,7 @@
       google.cloud.gcp_compute_disk:
         name: rhel1d
         size_gb: 50
-        source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
+        source_image: "projects/rhel-cloud/global/images/rhel-9-v20260811"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
@@ -21,7 +21,7 @@
       google.cloud.gcp_compute_disk:
         name: rhel2d
         size_gb: 50
-        source_image: "projects/rhel-cloud/global/images/rhel-9-v20221102"
+        source_image: "projects/rhel-cloud/global/images/rhel-9-v20260811"
         zone: "{{ gcp_zone }}"
         project: "{{ gcp_project }}"
         auth_kind: serviceaccount
